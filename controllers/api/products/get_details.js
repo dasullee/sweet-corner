@@ -14,12 +14,6 @@ module.exports = async (req, res, next) => {
     let product = {};  
     results.forEach(p => {
         const {altText, file, type, imageId: id, ...rest} = p;
-        // let {type} = p;
-
-        // if(type == "full_image"){
-        //     type = "image";
-        // }
-
         product = {
             ...product,
             ...rest,
