@@ -1,12 +1,18 @@
 const db = require('../../../db');
 const jwt = require('jwt-simple');
 const {cartSecret} = require('../../../config/jwt_cart');
+const {imageUrl, getCartTotals} = require('../../../helpers');
 
 module.exports = async (req, res, next) => {
     try{
         let cartToken = req.headers['x-cart-token'] || null;
+        const {quantity=1} = req.body;
         const {product_id} = req.params;
         let cartId = null;
+
+        if(isNaN(quantity)){
+            throw new StatusError(422, 'Invalid quantity received. Must be a number');
+        }
 
         // Validate product_id, is it a real product_id?
         const [[product=null]] = await db.execute('SELECT id FROM products WHERE pid=?', [product_id]);
@@ -38,46 +44,46 @@ module.exports = async (req, res, next) => {
             const tokenData = jwt.decode(cartToken, cartSecret);
             cartId = tokenData.cartId;
         }
+        const [[cart]] = await db.query(`SELECT * FROM cart WHERE id=?`, [cartId]);
         const [[existingItem = null]] = await db.query('SELECT id, quantity FROM cartItems WHERE productID=? AND cartId=?', [product.id, cartId]);
-        console.log('existingitem', existingItem);
+        let itemId = null;
+        // console.log('existingitem', existingItem);
         if(!existingItem){
-            const [addItemResult] = await db.execute('INSERT INTO cartItems (pid, cartId, productID, quantity) VALUES (UUID(),?,?,?)', [cartId, product.id, 1]);
-            console.log(addItemResult);
-            return res.send({
-                cartId,
-                cartToken,
-                message: '1 cupcake added to cart'
-            });
+            const [addItemResult] = await db.execute('INSERT INTO cartItems (pid, cartId, productID, quantity) VALUES (UUID(),?,?,?)', [cartId, product.id, quantity]);
+            itemId = addItemResult.insertId;
+            
         } else{
-            // Update existing item's quantity
-            const [updateItemResult] = await db.execute('UPDATE cartItems SET quantity=?', [2]);
-            console.log(updateItemResult);
-            return res.send({
-                cartId,
-                cartToken,
-                message: '2 cupcakes added to cart'
-            });
+            const [updateItemResult] = await db.execute('UPDATE cartItems SET quantity=quantity+? WHERE id=?', [quantity, existingItem.id]);
+            // console.log(updateItemResult);
+            itemId = existingItem.id;
         }
-        // send back this object
-        // {
-        //     cartId:'',
-        //     cartToken:'',
-        //     message: '1 cupcake added to cart'
-        // }
-        
-        // Does item exist in cart
+        const [[output]] = await db.query(
+            `SELECT ci.createdAt AS added, p.cost AS "each", ci.pid AS itemId, p.name, p.pid AS productId, 
+            ci.quantity, i.altText, i.file, (p.cost * ci.quantity) AS total 
+            FROM cartItems AS ci 
+            JOIN products AS p ON ci.productId=p.id 
+            JOIN images AS i ON i.productId=p.id 
+            WHERE ci.id=? AND i.type="thumbnail" LIMIT 1`
+        ,[itemId]);
 
-        // If yes, increase the quantity
-
-        // If no, add as new item cart
-
-    
+        const {altText, file, ...itemInfo} = output;
+        const total = await getCartTotals(cart.pid);
         res.send({
-            message: 'Add item to cart',
-            product_id,
+            cartId: cart.pid,
             cartToken,
-            cartId
-        })
+            item: {
+                ...itemInfo,
+                thumbnail: {
+                    altText,
+                    url: imageUrl(req, 'thumbnail', file)
+                }
+            },
+            message: `${quantity} ${itemInfo.name} cupcake(s) added to cart`,
+            total: {
+                cost: parseInt(total.cost),
+                items: parseInt(total.items)
+            }
+        });
     }
     catch(err){
         next(err);

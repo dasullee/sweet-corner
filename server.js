@@ -4,6 +4,9 @@ const StatusError = require('./helpers/status_error');
 const defaultErrorHandler = require('./middleware/default_error_handler');
 const app = express();
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+
 global.StatusError = StatusError;
 
 const routes = require('./routes');
