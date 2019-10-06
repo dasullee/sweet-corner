@@ -1,0 +1,31 @@
+@import '../../../assets/css/colors';
+
+.input-field {
+    input,
+    textarea {
+        border: none;
+        box-sizing: border-box;
+        font-size: 1em;
+        font-weight: 100;
+        margin-bottom: 12px;
+        padding: 0 10px;
+        width: 310px;
+    }
+
+    input {
+        height: 35px;
+
+        &::placeholder {
+            color: $brown;
+        }
+    }
+
+    textarea {
+        height: 115px;
+        padding-top: 6px;
+
+        &::placeholder {
+            color: $brown;
+        }
+    }
+}
