@@ -1,2 +1,2 @@
 # sweet-corner
-Full stack e-commerce demo website.
+Full stack e-commerce demo website
