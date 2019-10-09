@@ -109,7 +109,6 @@ export const createAccount = user => async dispatch => {
 export const getActiveCart = () => async dispatch => {
     try {
         const resp = await axios.get(`/api/cart`, withHeaders());
-
         dispatch({
             type: types.GET_ACTIVE_CART,
             cart: resp.data

@@ -10,6 +10,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 global.StatusError = StatusError;
+global.__rootdir = __dirname;
 
 const routes = require('./routes');
 app.use(routes);

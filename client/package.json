@@ -9,6 +9,9 @@
     },
     "/auth/*": {
       "target": "http://localhost:9000"
+    },
+    "/images/*": {
+      "target": "http://localhost:9000"
     }
   },
   "scripts": {
