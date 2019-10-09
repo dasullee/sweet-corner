@@ -1,0 +1,46 @@
+.contact {
+    margin-top: 30px;
+
+    .content-container {
+        .content {
+            padding-left: 55px;
+            width: 92%;
+
+            h2 {
+                padding-top: 0;
+            }
+        }
+    }
+
+    .contact-form {
+        padding-left: 90px;
+
+        h3 {
+            font-size: 1em;
+            margin-top: 0;
+        }
+
+        .button-container {
+            text-align: right;
+            width: 310px;
+
+            button {
+                border: none;
+                font-size: 1em;
+                line-height: 35px;
+                text-transform: uppercase;
+                width: 155px;
+            }
+        }
+    }
+
+    .left-dot-container {
+        padding: 2% 20% 10% 0;
+        text-align: right;
+    }
+
+    .right-dot-container {
+        padding: 24% 40% 12% 0;
+        text-align: right;
+    }
+}

@@ -1,0 +1,63 @@
+@import '../../assets/css/colors';
+
+.cart {
+    table {
+        border-spacing: 0 2em;
+        width: 100%;
+
+        thead {
+            th:not(.header-product){
+                text-align: right;
+            }
+        }
+
+        tbody {
+            .cart-item {
+                box-shadow: 0 1px 0 0;
+                cursor: pointer;
+                text-align: right;
+
+                &:hover {
+                    background-color: #f0f0f0;
+                }
+
+                .product-image {
+                    width: 100px;
+
+                    img {
+                        width: 100%;
+                    }
+                }
+
+                .product-name {
+                    text-align: center;
+                    width: calc(40% - 25px);
+                }
+
+                .product-cost,
+                .product-quantity,
+                .product-total {
+                    width: calc(20% - 25px);
+                }
+
+                .product-total {
+                    font-size: 1.2em;
+                    font-weight: bold;
+                }
+            }
+
+            .cart-totals {
+                font-size: 2em;
+                font-weight: bold;
+
+                td {
+                    text-align: right;
+                }
+            }
+        }
+    }
+
+    .guest-checkout-link {
+        font-size: 1.5em;
+    }
+}

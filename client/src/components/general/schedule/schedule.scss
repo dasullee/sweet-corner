@@ -1,0 +1,29 @@
+@import '../../../assets/css/colors';
+
+.schedule {
+    h3 {
+        font-size: 1em;
+    }
+
+    .schedule-row {
+        font-size: .9em;
+        margin-bottom: 5px;
+
+        div {
+            background-color: $light-background;
+            display: inline-block;
+            line-height: 35px;
+            text-align: center;
+        }
+
+        .day {
+            margin-left: 5px;
+            margin-right: 5px;
+            width: 152px;
+        }
+
+        .time {
+            width: 218px;
+        }
+    }
+}

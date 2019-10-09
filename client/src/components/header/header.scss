@@ -1,0 +1,17 @@
+@import '../../assets/css/colors';
+
+.header {
+    border-bottom: 24px solid $brown;
+
+    .header-awning {
+        background-image: url(../../assets/images/header.png);
+        height: 88px;
+    }
+
+    .header-logo {
+        background-image: url(../../assets/images/logo.png);
+        background-position-x: center;
+        background-repeat: no-repeat;
+        height: 195px;
+    }
+}

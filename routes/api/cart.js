@@ -9,8 +9,8 @@ router.get('/', getCart);
 // GET /api/cart/totals -- cart_totals.js
 router.get('/totals', getCartTotal);
 
-// POST /api/cart/item/:product_id
-router.post('/item/:product_id', addItemToCart);
+// POST /api/cart/items/:product_id
+router.post('/items/:product_id', addItemToCart);
 
 module.exports = router;
 

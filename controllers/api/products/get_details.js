@@ -27,7 +27,7 @@ module.exports = async (req, res, next) => {
                     altText,
                     file,
                     type: type + "s",
-                    URL: imageUrl(req, type, file)
+                    url: imageUrl(req, type, file)
                 }
             }
         });

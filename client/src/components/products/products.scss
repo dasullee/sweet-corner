@@ -1,0 +1,25 @@
+@import '../../assets/css/colors';
+
+.products {
+    &>h1 {
+        margin-bottom: 2em;
+    }
+
+    .product-item {
+        cursor: pointer;
+        display: inline-block;
+        transition-duration: 300ms;
+        vertical-align: top;
+        width: 33.33%;
+
+        &:hover {
+            background-color: $teal-light;
+            border-radius: 20px;
+            color: #fff;
+
+            img {
+                box-shadow: 4px 4px 6px #949494;
+            }
+        }
+    }
+}

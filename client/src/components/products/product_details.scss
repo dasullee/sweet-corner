@@ -1,0 +1,44 @@
+.product-details {
+    margin-top: 1.2em;
+
+    .product-image {
+        margin-top: 1.5em;
+
+        img {
+            width: 85%;
+        }
+    }
+
+    .product-info {
+        margin-top: 1.5em;
+        padding: 0 2.5em;
+
+        .caption {
+            font-size: 1.5em;
+        }
+
+        .product-quantity {
+            button {
+                cursor: pointer;
+            }
+
+            .quantity-controls {
+                align-items: center;
+                display: inline-flex;
+                width: 190px;
+
+                .btn-quantity {
+                    font-size: 1.5em;
+                    padding: 8px 14px;
+                }
+
+                .quantity {
+                    background-color: #efefef;
+                    font-size: 2em;
+                    margin: 0 10px;
+                    padding: 3px 12px;
+                }
+            }
+        }
+    }
+}

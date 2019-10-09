@@ -7,7 +7,12 @@ module.exports = async (req, res, next) => {
     try{
         const cartToken = req.headers['x-cart-token'] || null;
         if(!cartToken){
-            throw new StatusError(400, 'Missing cart token!');
+            return res.send({
+                total: {
+                    cost: 0,
+                    items: 0
+                }
+            });
         }
         const tokenData = jwt.decode(cartToken, cartSecret);
         const total = await getCartTotals(tokenData.cartId);
