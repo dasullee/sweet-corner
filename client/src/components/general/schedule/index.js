@@ -1,45 +1,44 @@
-import React, { Component } from 'react';
-import axios from 'axios';
-import './schedule.scss';
+import React from 'react'
+import axios from 'axios'
+import { connect } from 'react-redux';
+import actions from '../../../actions'
+import './schedule.scss'
 
-class Schedule extends Component {
-    state = {
-        schedule: []
+
+class Schedule extends React.Component{
+    componentDidMount(){
+        this.props.getSchedule()
     }
     
-    componentDidMount(){
-        this.getSchedule();
-    }
-
-    async getSchedule(){
-        const { data: { schedule } } = await axios.get('/data/schedule.json');
-
-        this.setState({ schedule });
-    }
-
     render(){
-        const { schedule } = this.state;
-
-        if(!schedule.length){
-            return null;
-        }
-
-        const scheduleElements = schedule.map(({close, day, open, pid}) => {
+        const tableRow = this.props.scheduleList.map((daily,index) => {
             return (
-                <div className="schedule-row" key={pid}>
-                    <div className="day">{day}</div>
-                    <div className="time">{open} - {close}</div>
-                </div>
-            )
-        });
-
-        return (
-            <div className="schedule">
-                <h3>For phone orders, our work schedule is:</h3>
-                {scheduleElements}
+            <tr key={index} >
+                <td className="day">{daily.day}</td>
+                <td className="hours">{daily.open} - {daily.close}</td>
+            </tr>
+        )})
+        return(
+            <div>
+                <p>For phone orders, our work schedule is:</p>
+                <table>
+                    <tbody>
+                        {tableRow}
+                    </tbody>
+                </table>
             </div>
-        );
+        )
+    }
+}
+function mapStateToProps(state){
+    return {
+        scheduleList: state.schedule.scheduleList
+    }
+}
+function mapDispatchToProps(dispatch){
+    return {
+        getSchedule: () => dispatch(actions.getSchedule())
     }
 }
 
-export default Schedule;
+export default connect(mapStateToProps, mapDispatchToProps)(Schedule)

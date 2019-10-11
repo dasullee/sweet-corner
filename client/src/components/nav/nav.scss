@@ -1,20 +1,22 @@
-@import '../../assets/css/colors';
 
-.account-nav,
 .main-nav {
-    text-align: right;
-    padding-left: 0;
-    padding-right: 12px;
+    float: right;
+    
+}
 
-    li {
-        display: inline-block;
-        margin: 0 18px;
+.main-nav li {
+    display: inline-block;
+    margin-left: 3vw;
+    line-height: 1em;
+    
+}
 
-        a {
-            color: $brown;
-            padding: 4px 8px;
-            text-decoration: none;
-            text-transform: uppercase;
-        }
-    }
+.link {
+    text-decoration: none;
+    color:#754b23;
+    font-size: 2vh
+}
+.cart-widget > *{
+    color: #754b23;
+    text-decoration: none;
 }

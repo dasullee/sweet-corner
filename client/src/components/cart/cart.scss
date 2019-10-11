@@ -1,63 +1,55 @@
-@import '../../assets/css/colors';
+.heading {
+    padding: 30px
+}
+.products {
+    padding: 10px
+}
+table { 
+    border-collapse: collapse;
+    margin: 50px;
+    width: 100%
+}
 
-.cart {
-    table {
-        border-spacing: 0 2em;
-        width: 100%;
-
-        thead {
-            th:not(.header-product){
-                text-align: right;
-            }
-        }
-
-        tbody {
-            .cart-item {
-                box-shadow: 0 1px 0 0;
-                cursor: pointer;
-                text-align: right;
-
-                &:hover {
-                    background-color: #f0f0f0;
-                }
-
-                .product-image {
-                    width: 100px;
-
-                    img {
-                        width: 100%;
-                    }
-                }
-
-                .product-name {
-                    text-align: center;
-                    width: calc(40% - 25px);
-                }
-
-                .product-cost,
-                .product-quantity,
-                .product-total {
-                    width: calc(20% - 25px);
-                }
-
-                .product-total {
-                    font-size: 1.2em;
-                    font-weight: bold;
-                }
-            }
-
-            .cart-totals {
-                font-size: 2em;
-                font-weight: bold;
-
-                td {
-                    text-align: right;
-                }
-            }
-        }
-    }
-
-    .guest-checkout-link {
-        font-size: 1.5em;
-    }
+.cartTable tr:nth-child(even) {
+    background-color: rgba(221,160,221,0.2)
+    
+}
+tr:last-child {
+    border-top: 5px solid #754b23;
+    background-color: white
+}
+.cartTable tr:last-child > td {
+    padding: 50px 0 50px 0;
+    font-size: 40px
+}
+table {
+    width: 70%;
+    margin: auto
+}
+tr > * {
+    border: 0;
+    margin: 0;
+    font-size: 23px
+}
+.productImage {
+    width: 150px;
+    padding: 10px;
+}
+.imageRow {
+    width: 150px;
+    
+}
+.brown{
+    color: #754b23
+}
+.guestCheckoutBtn {
+    height: 70px;
+    width: 300px;
+    background-color: #FF6331;
+    font-size: 150%;
+    color: white;
+    font-weight: bold
+}
+.checkoutOutline {
+    padding-bottom: 100px
 }

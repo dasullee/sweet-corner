@@ -1,10 +1,28 @@
-.home {
-    .content-container {
-        background-image: url(../../assets/images/strips2.png);
-
-        .dots {
-            right: 3%;
-            top: 5%;
-        }
-    }
+@font-face {
+    font-family: Allura;
+    src: url('../../assets/fonts/Allura-Regular.ttf')
+}
+.containerMain {
+    display: flex;
+    flex-wrap: nowrap;
+}
+.divSideDots {
+    position: relative;
+}
+.sideDots {
+    position: absolute;
+    right: 3vw;
+    top: 4vh
+}
+.main{
+    color: #754b23
+}
+.bottom {
+    font-family: Allura;
+    font-size: 3vh;
+    text-align: center;
+    width: 100%
+}
+.cupcakes{
+    width: 100%
 }

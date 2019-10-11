@@ -1,14 +1,4 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-
-const Money = ({children}) => {
-    const dollars = (children / 100).toFixed(2);
-
-    return <span className="money">${dollars}</span>;
+export default (num) => {
+    const number = num / 100
+    return "$" + number.toFixed(2)
 }
-
-Money.propTypes = {
-    children: PropTypes.number.isRequired
-}
-
-export default Money;

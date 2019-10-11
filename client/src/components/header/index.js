@@ -1,18 +1,15 @@
-import React from 'react';
-import AccountNav from '../nav/account_nav';
-import Nav from '../nav';
-import './header.scss';
+import React from 'react'
+import './header.scss'
+import Nav from '../nav'
 
-export default props => {
+export default () =>{
     return (
-        <div className="header">
-            <div className="header-awning"/>
-            
+        <div>
+            <img className="curtain" src={require('../../assets/images/header.png')}></img>
             <Nav />
-            <AccountNav />
-
-            <div className="header-logo"/>
-            <h1 className="center fancy">We deliver cupcakes for the important events in your life!</h1>
+            <img className="cupcake" src={require('../../assets/images/logo.png')}></img>
+            <h1 className="center headertext">We deliver cupcakes for the important events in your life!</h1>
+            <div className="brownheader"></div>
         </div>
-    );
+    )
 }

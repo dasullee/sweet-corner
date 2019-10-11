@@ -1,17 +1,31 @@
-@import '../../assets/css/colors';
+@font-face {
+    font-family: Allura;
+    src: url('../../assets/fonts/Allura-Regular.ttf')
+}
 
-.header {
-    border-bottom: 24px solid $brown;
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    
+}
+div .cupcake {
+    width: 20%;
+    height: auto;
+    margin-left: 42%;
+}
 
-    .header-awning {
-        background-image: url(../../assets/images/header.png);
-        height: 88px;
-    }
+div .curtain{
+    width: 100%
+}
 
-    .header-logo {
-        background-image: url(../../assets/images/logo.png);
-        background-position-x: center;
-        background-repeat: no-repeat;
-        height: 195px;
-    }
+.headertext {
+    font-family: Allura;
+    font-size: 2vw;
+    color:  #754b23
+}
+
+.brownheader {
+    background-color: #754b23;
+    height: 2vw
 }

@@ -1,134 +1,65 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { getActiveCart, userCartCheckout } from '../../actions';
-import Money from '../general/money';
-import './cart.scss';
+import React from 'react'
+import './cart.scss'
+import {connect} from 'react-redux'
+import {getActiveCart} from '../../actions'
 
-class Cart extends Component {
+class Cart extends React.Component {
     componentDidMount() {
+        // console.log("props before getActive", this.props)
+        // if (this.props.total && this.props.total.items != null){
+        //     this.props.getActiveCart()
+        // }
+        
         this.props.getActiveCart();
+        
     }
-
-    goToProduct(productId) {
-        this.props.history.push(`/products/${productId}`);
+    handleCheckoutGuest = () => {
+        this.props.history.push('/checkout/guest')
     }
-
-    handleCheckout = async () => {
-        const { history, userCartCheckout } = this.props;
-
-        const orderId = await userCartCheckout();
-
-        history.push(`/account/orders/${orderId}`);
-    }
-
-    renderCheckout(){
-        const { auth, cartItems } = this.props;
-
-        if(!cartItems || !cartItems.length){
-            return <h2 className="center"><Link to="/products">Back To Products</Link></h2>;
-        }
-
-        if(auth){
+    render() {
+        const tableProducts = this.props.cartItems.map((product,index) => {
             return (
-                <div className="checkout center mt-3">
-                    <button className="btn btn-red" onClick={this.handleCheckout}>Checkout</button>
-                </div>
-            );
-        }
-
-        return <h1 className="center">Must be <Link to="/account/sign-in">Signed In</Link> to checkout</h1>;
-    }
-
-    renderItem = ({ each, itemId, name, productId, quantity, thumbnail, total }) => {
-        return (
-            <tr className="cart-item" key={itemId} onClick={() => this.goToProduct(productId)}>
-                <td className="product-image">
-                    <img src={thumbnail.url} alt={thumbnail.altText} />
-                </td>
-                <td className="product-name">{name}</td>
-                <td className="product-cost">
-                    <Money>{each}</Money>
-                </td>
-                <td className="product-quantity">{quantity}</td>
-                <td className="product-total">
-                    <Money>{total}</Money>
-                </td>
-            </tr>
-        );
-    }
-
-    renderMessageRow(message) {
-        return (
-            <tr>
-                <td className="center" colSpan="5">
-                    <h1>{message}</h1>
-                </td>
-            </tr>
-        );
-    }
-
-    render(){
-        const { cartItems, totals } = this.props;
-        const totalCost = totals?.cost || 0;
-        const totalItems = totals?.items || 0;
-        let itemElements = this.renderMessageRow('Loading Cart items');
-
-        if(cartItems){
-            if(cartItems.length) {
-                itemElements = cartItems.map(this.renderItem);
-            } else {
-                itemElements = this.renderMessageRow('Cart Empty')
-            }
-        }
-
-        return (
-            <div className="cart">
-                <h1 className="center">Cart</h1>
-
-                <table>
-                    <thead>
-                        <tr>
-                            <th></th>
-                            <th className="header-product">Product</th>
+                <tr key={index} className="products">
+                    <td className="imageRow"><img src={product.thumbnail.url} align="right" className="productImage"></img></td>
+                    <td className="">{product.name}</td>
+                    <td className=""> ${(product.each/100).toFixed(2)} </td>
+                    <td className="">{product.quantity}</td>
+                    <td className=""> ${(product.total/100).toFixed(2)} </td>
+                </tr>
+        )})
+        return(
+            <div className="checkoutOutline">
+                <h1 className="heading center brown">Cart</h1>
+                <table align="center">
+                    <tbody className="cartTable">
+                        <tr className="brown">
+                            <th>Image</th>
+                            <th>Product</th>
                             <th>Each</th>
-                            <th>quantity</th>
+                            <th>Quantity</th>
                             <th>Total</th>
                         </tr>
-                    </thead>
-                    <tbody>
-                        {itemElements}
-                        {
-                            totalItems
-                                ? <tr className="cart-totals">
-                                    <td colSpan="3">Cart Totals:</td>
-                                    <td>{totalItems}</td>
-                                    <td>
-                                        <Money>{totalCost}</Money>
-                                    </td>
-                                </tr>
-                                : null
-                        }
+                        {this.props.cartItems ? tableProducts : <tr></tr>}
+                        <tr >
+                            <td></td>
+                            <td className="mergeCells" colSpan="2">Cart Total:</td>
+                            <td>{this.props.total ? this.props.total.items : 0}</td>
+                            <td>${this.props.total ? this.props.total.cost/100 : 0}</td>
+                        </tr>
                     </tbody>
                 </table>
-                {this.renderCheckout()}
-                <div className="center mt-3">
-                    <Link to="/checkout/guest" className="btn red guest-checkout-link">Checkout As Guest</Link>
-                </div>
+                <button className="guestCheckoutBtn center" onClick={this.handleCheckoutGuest}>Checkout as Guest</button>
             </div>
-        );
+        )
     }
 }
-
-function mapStateToProps(state) {
+function mapStateToProps(state){
     return {
-        auth: state.user.auth,
         cartItems: state.cart.items,
-        totals: state.cart.total
+        total: state.cart.total
     }
 }
 
 export default connect(mapStateToProps, {
     getActiveCart: getActiveCart,
-    userCartCheckout
-})(Cart);
+})(Cart)

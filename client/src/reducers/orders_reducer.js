@@ -1,15 +1,17 @@
-import types from '../actions/types';
+import types from '../actions/types'
 
 const DEFAULT_STATE = {
     details: null
-};
-
-export default (state = DEFAULT_STATE, {type, ...action}) => {
-    switch(type){
-        case types.GET_ORDER_DETAILS:
+}
+export default(state = DEFAULT_STATE, action) => {
+    switch(action.type){
         case types.GET_GUEST_ORDER_DETAILS:
-            return { ...state, details: { ...action } };
+            console.log("state in reducer", action)
+            return {
+                ...state,
+                details: action.guestOrder
+            }
         default:
-            return state;
+            return state
     }
 }

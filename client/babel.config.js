@@ -7,7 +7,6 @@ module.exports = function (api) {
       "@babel/preset-react"
     ],
     plugins: [
-      "syntax-async-functions",
       ["@babel/plugin-proposal-decorators", { "legacy": true }],
       "@babel/plugin-proposal-export-namespace-from",
       "@babel/plugin-proposal-function-sent",
