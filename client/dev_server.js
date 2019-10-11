@@ -27,7 +27,7 @@ const server = new WebpackDevServer(webpack(config), {
 })
 
 server.listen(PORT, () => {
-    console.log('\x1b[36m%s\x1b[33m%s\x1b[0m', 'Dev server running at ', 'localhost:' + PORT);
+    console.log('\n\x1b[36m%s\x1b[33m%s\x1b[0m', 'Dev server running at ', 'localhost:' + PORT);
     console.log('\x1b[32m%s\x1b[0m', '\nWebpack compiling...\n');
 }).on('error', err => {
     console.log('\n\x1b[37m%s\x1b[33m%s\x1b[37m%s\x1b[36m%s\x1b[33m%s\x1b[0m\n\n', '========', ' REACT DEV SERVER LISTEN ERROR ','========','\nYou probably already have a server running on PORT:', PORT);

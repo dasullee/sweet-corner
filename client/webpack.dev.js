@@ -5,12 +5,16 @@ const PORT = process.env.PORT || 3000;
 
 module.exports = merge(common, {
     entry: [
-        '@babel/polyfill',
+        'core-js/stable',
+        'regenerator-runtime/runtime',
         'webpack-dev-server/client?http://localhost:' + PORT,
         './index.js'
     ],
     devtool: 'inline-source-map',
     mode: 'development',
+    watchOptions: {
+        poll: 1000
+    },
     plugins: [
         new webpack.NamedModulesPlugin()
     ]

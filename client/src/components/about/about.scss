@@ -1,3 +1,18 @@
-.about {
-    @import '../../assets/css/page_common';
+.containerAbout {
+    display: flex;
+    flex-direction: row
+}
+.body {
+    order: 1
+}
+.aboutDotsSide {
+    order: 2;
+    height: 20vh;
+    padding: 50px
+}
+.aboutStrip {
+    order: 3
+}
+.bottomAbout {
+    width: 100%
 }

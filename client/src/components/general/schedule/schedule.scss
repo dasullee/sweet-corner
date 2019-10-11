@@ -1,29 +1,18 @@
-@import '../../../assets/css/colors';
-
-.schedule {
-    h3 {
-        font-size: 1em;
-    }
-
-    .schedule-row {
-        font-size: .9em;
-        margin-bottom: 5px;
-
-        div {
-            background-color: $light-background;
-            display: inline-block;
-            line-height: 35px;
-            text-align: center;
-        }
-
-        .day {
-            margin-left: 5px;
-            margin-right: 5px;
-            width: 152px;
-        }
-
-        .time {
-            width: 218px;
-        }
-    }
+p {
+    color: #754b23;
+}
+td {
+    text-align: center;
+    color: #754b23;
+    border: solid 2px white
+}
+.day {
+    width: 152px;
+    height: 35px;
+    background-color: #f6ede6
+}
+.hours {
+    width: 218px;
+    height: 35px;
+    background-color: #f6ede6
 }

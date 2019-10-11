@@ -1,46 +1,56 @@
-.contact {
-    margin-top: 30px;
-
-    .content-container {
-        .content {
-            padding-left: 55px;
-            width: 92%;
-
-            h2 {
-                padding-top: 0;
-            }
-        }
-    }
-
-    .contact-form {
-        padding-left: 90px;
-
-        h3 {
-            font-size: 1em;
-            margin-top: 0;
-        }
-
-        .button-container {
-            text-align: right;
-            width: 310px;
-
-            button {
-                border: none;
-                font-size: 1em;
-                line-height: 35px;
-                text-transform: uppercase;
-                width: 155px;
-            }
-        }
-    }
-
-    .left-dot-container {
-        padding: 2% 20% 10% 0;
-        text-align: right;
-    }
-
-    .right-dot-container {
-        padding: 24% 40% 12% 0;
-        text-align: right;
-    }
+.column {
+    // box-sizing: border-box;
+    display: inline-block;
+    vertical-align: top;
+    width: 50%
+}
+.middleDots {
+    float: right;
+    margin-right: 100px
+}
+.rightDots {
+    float: right;
+    position: relative; top:80px;
+    margin-right: 200px
+}
+.contactP {
+    color: #754b23;
+}
+.title{
+    font-size: 20px;
+    color: #754b23;
+    text-align: center;
+    margin-left: -185px;
+    margin-bottom: 0
+}
+.mainForm {
+    text-align: center;
+    padding: 10px
+}
+.contactForm {
+    
+    width: 290px;
+    height: 15px;
+    border-style: none;
+    padding: 10px;
+    margin: 3px
+}
+.orange {
+    background-color: #e86b35
+}
+.yellow {
+    background-color: #f6b53e
+}
+.teel {
+    background-color: #06b4af
+}
+.btn {
+    width: 155px;
+    height: 35px;
+    margin: 3px;
+    margin-right: -155px;
+    color: white
+}
+.message {
+    height: 115px;
 }

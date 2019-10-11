@@ -1,14 +1,13 @@
-import React from 'react';
-import Money from '../general/money';
+import React from 'react'
+import Money from '../general/money'
 
-export default ({caption, cost, goToDetails, name, thumbnail}) => {
-
-    return (
-        <div className="product-item center" onClick={goToDetails}>
-            <h1>{name}</h1>
-            <img src={thumbnail.url} alt={thumbnail.altText} />
-            <h4>{caption}</h4>
-            <h2><Money>{cost}</Money></h2>
+export default (props) => {
+    return(
+        <div className="product-item" onClick={props.goToDetails}>
+            <h1>{props.name}</h1>
+            <img src={props.thumbnail.url}></img>
+            <p>{props.caption}</p>
+            <h3>{Money(props.cost)}</h3>
         </div>
-    );
+    )
 }

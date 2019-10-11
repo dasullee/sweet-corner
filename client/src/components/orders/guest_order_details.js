@@ -1,92 +1,88 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { getGuestOrderDetails } from '../../actions';
-import { queryToObject } from '../../helpers';
-import Money from '../general/money';
-import './orders.scss';
+import React from 'react'
+import {getGuestOrderDetails, getActiveCart} from '../../actions'
+import {connect} from 'react-redux'
+import { queryToObject } from '../../helpers'
+import Cart from '../cart'
+import './guest-order.scss'
 
-class GuestOrderDetails extends Component {
+class GuestOrderDetails extends React.Component {
+    constructor(props){
+        super(props)
+
+    }
     componentDidMount(){
-        const { getGuestOrderDetails, location, match } = this.props;
-        const orderId = match.params.order_id;
-        const query = queryToObject(location.search);
+        const { match, location } = this.props;
+        
+        // const query = queryToObject(location.search);
 
-        getGuestOrderDetails(orderId, query.email);
+        // console.log('Query Object:', query);
+        const orderID = match.params.order_id
+        this.props.getGuestOrderDetails(orderID, location.search)
     }
-
-    renderItemRow({each, id, product, quantity, total}){
-        return (
-            <tr key={id}>
-                <td>
-                    <img src={product.thumbnail.url} alt={product.thumbnail.altText}/>
-                </td>
-                <td className="product-name">{product.name}</td>
-                <td><Money>{each}</Money></td>
-                <td>{quantity}</td>
-                <td><Money>{total}</Money></td>
-            </tr>
-        );
-    }
-
-    renderOrderDetails(){
-        const { order } = this.props;
-
-        if(!order){
-            return <h2 className="center">Loading Order Information...</h2>
+    render() {
+        if (this.props.orderDetails == null){
+            return <h1>Loading product...</h1>
         }
-
-        return (
-            <div className="details-container">
-                <div className="center details-header">
-                    <h1>Status: <span className="yellow-text">{order.status}</span></h1>
-                    <h2>Order #: <span className="red-text">{order.id}</span></h2>
-                    <p><small><em>** Save order number to check order status in the future **</em></small></p>
+        else{
+            const goThruItems = this.props.orderDetails.items.map((insideproduct, index) => {
+                console.log("hi", insideproduct)
+                return (
+                    <tr key={index} className="">
+                        
+                        <td className="imgRow"><img src={insideproduct.product.thumbnail.url} align="right" className="imgCheckout"></img></td>
+                        <td className="checkout">{insideproduct.product.name}</td>
+                        <td className="checkout"> ${(insideproduct.each/100).toFixed(2)} </td>
+                        <td className="checkout">{insideproduct.quantity}</td>
+                        <td className="checkout"> ${(insideproduct.total/100).toFixed(2)} </td>
+                    </tr>
+                )})
+            return(
+                <div>
+                    <header>
+                        <h1 className="center">Guest Order Details</h1>
+                        <h1 className="center">Status: {this.props.orderDetails.status}</h1>
+                        <h2 className="center">Order #: {this.props.orderDetails.id}</h2>
+                        <h4 className="center">** Save order number to check order status in the future **</h4>
+                    </header>
+                    <div>
+                        <p>Order Placed: {this.props.orderDetails.createdAt}</p>
+                        <p>Order Total Items: {this.props.orderDetails.itemCount}</p>
+                        <p>Order Total Cost: ${(this.props.orderDetails.total/100).toFixed(2)}</p>
+                        <p>Order Items: </p>
+                        <table>
+                            <tbody className="guestOrderTable">
+                                <tr className="brown">
+                                    <th>Image</th>
+                                    <th>Product</th>
+                                    <th>Each</th>
+                                    <th>Quantity</th>
+                                    <th>Total</th>
+                                </tr>
+                                {goThruItems}
+                                <tr >
+                                    <td></td>
+                                    <td className="mergeCells" colSpan="2">Order Totals:</td>
+                                    <td>{this.props.orderDetails ? this.props.orderDetails.itemCount : 0}</td>
+                                    <td>${this.props.orderDetails ? (this.props.orderDetails.total/100).toFixed(2) : 0}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                    </div>
                 </div>
-                
-                <p><strong>Order Placed:</strong> {new Date(order.createdAt).toLocaleString()}</p>
-                <p><strong>Order Total Items:</strong> {order.itemCount}</p>
-                <p><strong>Order Total Cost:</strong> <Money>{order.total}</Money></p>
+            )
 
-                <h2>Order Items:</h2>
-
-                <table>
-                    <thead>
-                        <tr>
-                            <th></th>
-                            <th className="header-product-name">Product</th>
-                            <th>Each</th>
-                            <th>Quantity</th>
-                            <th>Total</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {order.items.map(this.renderItemRow)}
-                        <tr className="cart-totals">
-                            <td colSpan="3">Order Totals:</td>
-                            <td>{order.itemCount}</td>
-                            <td><Money>{order.total}</Money></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        );
-    }
-
-    render(){
-
-        return (
-            <div className="order-details">
-                <h1 className="center"><span className="teal-text">Guest</span> Order Details</h1>
-                {this.renderOrderDetails()}
-            </div>
-        );
+        }
     }
 }
-
-function mapStateToProps({orders}){
+function mapStateToProps(state){
+    console.log("state", state)
     return {
-        order: orders.details
+        // guestOrder: state.cart.items,
+        // cartItems: state.cart.items,
+        orderDetails: state.orders.details
     }
 }
-
-export default connect(mapStateToProps, { getGuestOrderDetails })(GuestOrderDetails);
+export default connect(mapStateToProps, {
+    getGuestOrderDetails: getGuestOrderDetails,
+})(GuestOrderDetails)

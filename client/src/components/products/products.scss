@@ -1,25 +1,25 @@
-@import '../../assets/css/colors';
-
-.products {
-    &>h1 {
-        margin-bottom: 2em;
-    }
-
-    .product-item {
-        cursor: pointer;
-        display: inline-block;
-        transition-duration: 300ms;
-        vertical-align: top;
-        width: 33.33%;
-
-        &:hover {
-            background-color: $teal-light;
-            border-radius: 20px;
-            color: #fff;
-
-            img {
-                box-shadow: 4px 4px 6px #949494;
-            }
-        }
-    }
+.product-item {
+    
+    // display: inline-block;
+    padding: 10px;
+    width: 31%;
+    position: relative;
+    justify-content: center;
+    text-align: center;
+    cursor: pointer;
+}
+.product-item:hover {
+    background-color: lightpink;
+    border-radius: 25px
+}
+.containerCupCakes {
+    justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+    // width: 100%
+    color:#754b23;
+}
+.titleShop {
+    color:#754b23;
+    text-align: center;
 }
