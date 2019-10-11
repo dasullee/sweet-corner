@@ -10,6 +10,10 @@ module.exports = async (req, res, next) => {
         const {product_id} = req.params;
         let cartId = null;
 
+        if(cartToken === '[object Object]' || cartToken === 'undefined'){
+            cartToken = null;
+        }
+
         if(isNaN(quantity)){
             throw new StatusError(422, 'Invalid quantity received. Must be a number');
         }
