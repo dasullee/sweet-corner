@@ -1,0 +1,55 @@
+.heading {
+    padding: 30px
+}
+.products {
+    padding: 10px
+}
+table { 
+    border-collapse: collapse;
+    margin: 50px;
+    width: 100%
+}
+
+.cartTable tr:nth-child(even) {
+    background-color: rgba(221,160,221,0.2)
+    
+}
+tr:last-child {
+    border-top: 5px solid #754b23;
+    background-color: white
+}
+.cartTable tr:last-child > td {
+    padding: 50px 0 50px 0;
+    font-size: 40px
+}
+table {
+    width: 70%;
+    margin: auto
+}
+tr > * {
+    border: 0;
+    margin: 0;
+    font-size: 23px
+}
+.productImage {
+    width: 150px;
+    padding: 10px;
+}
+.imageRow {
+    width: 150px;
+    
+}
+.brown{
+    color: #754b23
+}
+.guestCheckoutBtn {
+    height: 70px;
+    width: 300px;
+    background-color: #FF6331;
+    font-size: 150%;
+    color: white;
+    font-weight: bold
+}
+.checkoutOutline {
+    padding-bottom: 100px
+}

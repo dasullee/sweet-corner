@@ -1,0 +1,18 @@
+.containerServices {
+    display: flex;
+    flex-direction: row
+}
+.body {
+    order: 1
+}
+.sideDotsServices {
+    order: 2;
+    height: 20vh;
+    padding: 50px
+}
+.side {
+    order: 3
+}
+.bottom {
+    width: 100%
+}
